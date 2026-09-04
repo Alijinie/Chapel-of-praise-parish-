@@ -1,0 +1,1110 @@
+import { CHURCH_INFO } from '../data';
+
+/**
+ * Utility to generate and download a 100% self-contained, standalone single HTML file
+ * representing the entire RCBC Chapel of Praise church web app with all tabs,
+ * Tailwind styling, JavaScript interactive logic, carousel, modals, and forms.
+ */
+export function generateStandaloneChurchHtml(): string {
+  return `<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RCBC Chapel of Praise (Main Campus) | Raising Christ's Ambassadors</title>
+    <meta name="description" content="Official website for RCBC Chapel of Praise (Main Campus), the institutional campus parish of the Redeemed Christian Bible College inside Redemption City.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="RCBC Chapel of Praise (Main Campus) | Raising Christ's Ambassadors">
+    <meta property="og:description" content="Spiritual epicenter of RCBC inside Redemption City: Main Sanctuary, Youth Church, and Teenagers Church.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rcbc: {
+                            navy: '#16243B',
+                            dark: '#0F172A',
+                            gold: '#D97706',
+                            amber: '#F59E0B',
+                            cream: '#FAF8F5',
+                            emerald: '#059669',
+                            sky: '#2563EB',
+                            accent: '#DC2626'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background: #FAF8F5; }
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(22, 36, 59, 0.08);
+        }
+        .glass-card {
+            background: linear-gradient(145deg, #FFFFFF 0%, #FAF8F5 100%);
+            border: 1px solid rgba(22, 36, 59, 0.07);
+            box-shadow: 0 12px 35px rgba(22, 36, 59, 0.04);
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-280px * 8)); }
+        }
+        .carousel-track {
+            display: flex;
+            width: calc(280px * 16);
+            animation: scroll 40s linear infinite;
+        }
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        .fade-up {
+            animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-rcbc-cream text-rcbc-navy font-sans min-h-screen flex flex-col selection:bg-rcbc-amber selection:text-rcbc-dark overflow-x-hidden">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-rcbc-dark text-white text-[11px] sm:text-xs py-2 px-4 border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-bold text-amber-400">NEXT GATHERING:</span>
+                <span class="text-slate-200">Sunday Celebration & Expression Service • 8:00 AM</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-4 text-slate-300 font-medium">
+                <span><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> Christ's Ambassadors Road, Redemption City</span>
+                <span class="text-amber-400/50">|</span>
+                <span><i class="fa-brands fa-whatsapp text-emerald-400 mr-1"></i> +234 803 300 7222</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop / Top Header -->
+    <header class="sticky top-0 w-full z-40 px-3 sm:px-6 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto glass rounded-2xl sm:rounded-full px-4 sm:px-6 py-2.5 flex justify-between items-center shadow-lg shadow-rcbc-navy/5">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('home')">
+                <div class="h-11 w-11 rounded-full bg-rcbc-navy flex items-center justify-center text-amber-400 shadow-inner border border-amber-500/30 flex-shrink-0">
+                    <i class="fa-solid fa-church text-lg"></i>
+                </div>
+                <div>
+                    <span class="block text-sm sm:text-base font-extrabold tracking-tight text-rcbc-navy font-serif uppercase">RCBC Chapel of Praise</span>
+                    <span class="block text-[9px] sm:text-[10px] text-rcbc-gold font-bold tracking-widest uppercase">Main Campus • "Raising Christ's Ambassadors"</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-rcbc-navy/75">
+                <button onclick="switchView('home')" id="d-nav-home" class="text-rcbc-gold font-extrabold border-b-2 border-rcbc-gold pb-0.5">Home</button>
+                <button onclick="switchView('ministries')" id="d-nav-ministries" class="hover:text-rcbc-gold transition-colors">Ministries</button>
+                <button onclick="switchView('sermons')" id="d-nav-sermons" class="hover:text-rcbc-gold transition-colors">Sermons & Media</button>
+                <button onclick="switchView('events')" id="d-nav-events" class="hover:text-rcbc-gold transition-colors">Events & Calendar</button>
+                <button onclick="switchView('giving')" id="d-nav-giving" class="hover:text-rcbc-gold transition-colors">Giving</button>
+                <button onclick="switchView('contact')" id="d-nav-contact" class="hover:text-rcbc-gold transition-colors">Plan Visit / Contact</button>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <button onclick="openLiveModal()" class="hidden sm:inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-bold shadow-md transition-all">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                    <span>Stream Live</span>
+                </button>
+                <button onclick="downloadSelf()" title="Export this page as standalone HTML" class="bg-rcbc-navy hover:bg-slate-800 text-amber-400 px-3.5 py-2 rounded-full text-xs font-bold border border-amber-500/30 flex items-center gap-1.5 transition-all shadow-sm">
+                    <i class="fa-solid fa-file-arrow-down text-sm"></i>
+                    <span class="hidden md:inline">Export HTML</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 pb-28 sm:pb-20 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto w-full pt-4">
+
+        <!-- ================= TAB 1: HOME ================= -->
+        <section id="view-home" class="space-y-14 fade-up">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden bg-rcbc-dark text-white shadow-2xl border border-amber-500/20 p-6 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-center justify-between">
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-amber-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-20 -top-20 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="lg:w-7/12 z-10 space-y-5 text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 text-[11px] font-bold tracking-wide uppercase">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Redeemed Christian Bible College • Main Campus Parish</span>
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold leading-[1.15]">
+                        Raising Christ's <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500">Ambassadors</span> to Nations.
+                    </h1>
+                    
+                    <p class="text-slate-300 text-sm sm:text-base max-w-xl font-normal leading-relaxed">
+                        Welcome to RCBC Chapel of Praise. Located along Christ's Ambassadors Road inside Redemption City, we are an apostolic training ground and multi-generational church encompassing the Main Sanctuary, the high-energy Youth Church, and the Teenagers Church.
+                    </p>
+                    
+                    <div class="pt-2 flex flex-wrap gap-3 items-center">
+                        <button onclick="switchView('contact')" class="bg-amber-500 text-rcbc-dark px-6 py-3 rounded-xl font-extrabold text-xs sm:text-sm hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/20 flex items-center gap-2">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <span>Plan Your Visit</span>
+                        </button>
+                        <button onclick="openLiveModal()" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-white/10 hover:bg-white/20 border border-white/15 transition-all text-white flex items-center gap-2">
+                            <i class="fa-solid fa-play text-red-400"></i>
+                            <span>Stream Sunday Service Live</span>
+                        </button>
+                        <button onclick="switchView('ministries')" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/20">
+                            Our 3 Ministries
+                        </button>
+                    </div>
+
+                    <!-- Location Anchor Tag -->
+                    <div class="pt-3 flex items-center gap-2 text-xs text-slate-300">
+                        <i class="fa-solid fa-location-crosshairs text-amber-400"></i>
+                        <span><strong>Campus Proximity:</strong> Christ's Ambassadors Road inside Redemption City (Km 46, Lagos-Ibadan Exp.)</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 lg:mt-0 lg:w-4/12 relative flex justify-center">
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-500/30">
+                        <img src="https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=800&q=80" alt="RCBC Chapel Sanctuary" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 bg-white text-rcbc-navy px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-100">
+                        <div class="text-amber-600 font-black text-2xl">3</div>
+                        <div class="text-[11px] font-bold leading-tight uppercase tracking-wider">Distinct Ministries<br><span class="text-slate-500 font-semibold text-[10px]">Under One Umbrella</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Three Distinct Ministries Umbrella Quick Grid -->
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 border-b border-rcbc-navy/10 pb-4">
+                    <div>
+                        <span class="text-amber-700 text-xs font-black tracking-widest uppercase">Three-Tier Umbrella Structure</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-rcbc-navy font-serif mt-1">Ministries Tailored for Every Generation</h2>
+                    </div>
+                    <button onclick="switchView('ministries')" class="text-xs font-bold text-amber-700 hover:underline flex items-center gap-1">
+                        Explore Full Details <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 1. Main Sanctuary -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-t-amber-600 space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded bg-amber-100 text-amber-900">Adult & Seminary</span>
+                                <span class="text-xs font-bold text-slate-400">Sun 8:00 AM</span>
+                            </div>
+                            <h3 class="font-serif font-bold text-xl text-rcbc-navy">The Main Sanctuary</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                The spiritual epicenter of the Redeemed Christian Bible College (Main Campus). Training hub for future global pastors, theologians, and Christ's ambassadors with deep doctrinal grounding and apostolic prayer.
+                            </p>
+                            <div class="bg-amber-50/70 p-3 rounded-xl text-[11px] text-amber-900 border border-amber-200/60 font-medium">
+                                <strong>Key Pillars:</strong> Scriptural depth, family-centered leadership, and Holy Ghost Service alignment.
+                            </div>
+                        </div>
+                        <button onclick="openMinistryModal('main')" class="w-full py-2.5 rounded-xl bg-rcbc-navy text-amber-400 text-xs font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-1.5">
+                            <span>View Sanctuary Schedule & Pillars</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 2. Youth Church -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-t-blue-600 space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded bg-blue-100 text-blue-900">Ignite & Deploy</span>
+                                <span class="text-xs font-bold text-slate-400">Sun 8:00 AM / 10:00 AM</span>
+                            </div>
+                            <h3 class="font-serif font-bold text-xl text-rcbc-navy">The Youth Church</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                A high-energy, contemporary expressions ministry tailoring word and worship to undergraduates, young professionals, and campus scholars. "Arise and Shine" & "Shift Gears" fellowship circles.
+                            </p>
+                            <div class="bg-blue-50/70 p-3 rounded-xl text-[11px] text-blue-900 border border-blue-200/60 font-medium">
+                                <strong>Core Focus:</strong> Purpose discovery, career excellence, spiritual fire, creative arts, and vocational growth.
+                            </div>
+                        </div>
+                        <button onclick="openMinistryModal('youth')" class="w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-all flex items-center justify-center gap-1.5">
+                            <span>Explore Youth Expressions</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- 3. Teenagers Church -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-t-emerald-600 space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded bg-emerald-100 text-emerald-900">The Overflow</span>
+                                <span class="text-xs font-bold text-slate-400">Sun 8:30 AM Wing</span>
+                            </div>
+                            <h3 class="font-serif font-bold text-xl text-rcbc-navy">The Teenagers Church</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                A vibrant, nurturing, and safe environment designed specifically for teenagers to cross from childhood faith into deep, personal relationships with Christ. Running in a designated overflow wing.
+                            </p>
+                            <div class="bg-emerald-50/70 p-3 rounded-xl text-[11px] text-emerald-900 border border-emerald-200/60 font-medium">
+                                <strong>Features:</strong> Bible quizzes, multimedia workshops, film shows, and safe mentorship panels.
+                            </div>
+                        </div>
+                        <button onclick="openMinistryModal('teens')" class="w-full py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-all flex items-center justify-center gap-1.5">
+                            <span>Explore The Overflow</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campus Activities Infinite Carousel -->
+            <div class="space-y-4 pt-2 overflow-hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2">
+                    <div>
+                        <span class="text-amber-700 text-xs font-black tracking-widest uppercase">Life on Christ's Ambassadors Road</span>
+                        <h2 class="text-2xl font-bold text-rcbc-navy font-serif">Campus Chapel & Seminary Moments</h2>
+                    </div>
+                    <p class="text-xs text-slate-500 font-semibold italic">Worship • Bible Scholarship • Youth Passion • Community</p>
+                </div>
+
+                <div class="relative w-full overflow-hidden py-2 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-16 before:bg-gradient-to-r before:from-rcbc-cream before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-16 after:bg-gradient-to-l after:from-rcbc-cream after:to-transparent">
+                    <div id="carousel-track-el" class="carousel-track flex gap-4">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: The Four Foundational Pillars -->
+            <div class="space-y-6">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-amber-700 text-xs font-black tracking-widest uppercase">The Pillars</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-extrabold text-rcbc-navy">Theological Grounding & Apostolic Power</h2>
+                    <p class="text-xs sm:text-sm text-slate-600">Built upon four non-negotiable spiritual standards set by the Redeemed Christian Bible College.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 font-extrabold flex items-center justify-center text-sm">01</div>
+                        <h3 class="font-bold text-sm text-rcbc-navy">Theological Grounding</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Anchored directly to the systematic Bible curriculum of RCBC. Solid expository preaching, doctrinal integrity, and truth without compromise.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 font-extrabold flex items-center justify-center text-sm">02</div>
+                        <h3 class="font-bold text-sm text-rcbc-navy">Apostolic Intercession</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Maintaining an unceasing altar of prayer through Thursday Faith Clinic and pre-Holy Ghost Service prayer vigils that birth spiritual revival.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 font-extrabold flex items-center justify-center text-sm">03</div>
+                        <h3 class="font-bold text-sm text-rcbc-navy">Raising Ambassadors</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Commissioning campus scholars, student ministers, and youth into marketplace and pulpit leadership with global kingdom excellence.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 font-extrabold flex items-center justify-center text-sm">04</div>
+                        <h3 class="font-bold text-sm text-rcbc-navy">Holy Ghost Service Alignment</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Positioned inside Redemption City, in constant spiritual alignment with the monthly global Holy Ghost Services and international conventions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chaplain's Welcome Message -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-amber-500/20 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <div class="md:col-span-4 flex justify-center">
+                    <div class="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-amber-500/30 shadow-xl bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80" alt="Chaplain RCBC" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="md:col-span-8 space-y-3 text-left">
+                    <span class="text-amber-700 text-xs font-black tracking-widest uppercase">Welcome from the College Chaplain</span>
+                    <h3 class="font-serif font-extrabold text-2xl text-rcbc-navy">"A Sanctuary where Biblical Scholarship meets Holy Ghost Fire."</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        "Grace to you in the name of our Lord Jesus Christ. RCBC Chapel of Praise is not just another parish; it is the spiritual crucible of the Redeemed Christian Bible College. Whether you are an undergraduate, an adult resident of Redemption City, or a teenager finding your path, our three distinct expressions ensure you are nurtured, empowered, and deployed as Christ's ambassador."
+                    </p>
+                    <div class="pt-2">
+                        <div class="font-serif font-bold text-rcbc-navy text-sm">Pastor (Prof.) Babatunde Olawale</div>
+                        <div class="text-[11px] text-amber-700 font-bold uppercase tracking-wider">Chaplain & Pastor-in-Charge, RCBC Main Campus</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Schedule Snapshot Table -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                    <div>
+                        <h3 class="font-serif font-bold text-xl text-rcbc-navy">Weekly Service Timings</h3>
+                        <p class="text-xs text-slate-500">Join us in person on Christ's Ambassadors Road or stream live online</p>
+                    </div>
+                    <button onclick="switchView('contact')" class="bg-rcbc-navy text-amber-400 text-xs px-4 py-2 rounded-xl font-bold hover:bg-slate-800">
+                        Get Directions
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="text-amber-600 font-bold text-xs uppercase">Every Sunday</div>
+                        <div class="font-bold text-base text-rcbc-navy mt-1">Sunday Celebration Service</div>
+                        <div class="text-xs font-bold text-slate-700 mt-0.5"><i class="fa-regular fa-clock mr-1 text-amber-500"></i> 8:00 AM – 10:30 AM</div>
+                        <p class="text-[11px] text-slate-500 mt-2">Simultaneous Main Sanctuary, Youth Expression & Teenagers Overflow.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="text-blue-600 font-bold text-xs uppercase">Every Tuesday</div>
+                        <div class="font-bold text-base text-rcbc-navy mt-1">Digging Deep (Bible Study)</div>
+                        <div class="text-xs font-bold text-slate-700 mt-0.5"><i class="fa-regular fa-clock mr-1 text-blue-500"></i> 6:00 PM – 7:45 PM</div>
+                        <p class="text-[11px] text-slate-500 mt-2">Systematic expository study of scriptures led by RCBC theological faculty.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                        <div class="text-emerald-600 font-bold text-xs uppercase">Every Thursday</div>
+                        <div class="font-bold text-base text-rcbc-navy mt-1">Faith Clinic (Intensive Prayer)</div>
+                        <div class="text-xs font-bold text-slate-700 mt-0.5"><i class="fa-regular fa-clock mr-1 text-emerald-500"></i> 6:00 PM – 7:30 PM</div>
+                        <p class="text-[11px] text-slate-500 mt-2">Targeted intercessory warfare, healing prayers, and personal faith ministry.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: MINISTRIES ================= -->
+        <section id="view-ministries" class="hidden space-y-10 fade-up">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border-l-8 border-l-amber-500">
+                <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">A Three-Tier Kingdom Umbrella</span>
+                <h2 class="text-2xl sm:text-3xl font-serif font-extrabold text-rcbc-navy mt-1">Our Ministries at RCBC Chapel of Praise</h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                    Structured to cultivate the spiritual potential of theological scholars, mature adults, vibrant university undergraduates, and teenagers.
+                </p>
+            </div>
+
+            <!-- Ministry Switcher Buttons -->
+            <div class="flex flex-wrap gap-2 sm:gap-3 p-1.5 bg-slate-200/70 rounded-2xl max-w-xl">
+                <button onclick="showMinistrySection('main')" id="m-btn-main" class="flex-1 py-2.5 px-3 rounded-xl font-bold text-xs bg-white text-rcbc-navy shadow-sm transition-all">
+                    1. Main Sanctuary
+                </button>
+                <button onclick="showMinistrySection('youth')" id="m-btn-youth" class="flex-1 py-2.5 px-3 rounded-xl font-bold text-xs text-slate-600 hover:text-rcbc-navy transition-all">
+                    2. Youth Church
+                </button>
+                <button onclick="showMinistrySection('teens')" id="m-btn-teens" class="flex-1 py-2.5 px-3 rounded-xl font-bold text-xs text-slate-600 hover:text-rcbc-navy transition-all">
+                    3. Teenagers Church
+                </button>
+            </div>
+
+            <!-- Tier 1: Main Sanctuary Detail -->
+            <div id="min-sec-main" class="space-y-6">
+                <div class="glass-card rounded-3xl p-6 sm:p-8 border-t-4 border-t-amber-600 space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-amber-700 bg-amber-100 px-3 py-1 rounded-full">Adult Church & Seminary Hub</span>
+                            <h3 class="text-2xl sm:text-3xl font-serif font-extrabold text-rcbc-navy mt-2">The Main Sanctuary</h3>
+                            <p class="text-xs sm:text-sm text-slate-600">The Spiritual Epicenter of the Redeemed Christian Bible College (Main Campus)</p>
+                        </div>
+                        <button onclick="openVolunteerModal('Main Sanctuary')" class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md">
+                            Join Sanctuary Department
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            <p>
+                                <strong>The Identity:</strong> Serving as the primary apostolic training hub for future global pastors, theologians, and Christ's ambassadors dispatched across nations. It combines academic theology with blazing Holy Ghost power.
+                            </p>
+                            <p>
+                                <strong>Core Focus:</strong> Scriptural depth, intensive prayer, classical and contemporary worship, and doctrinal integrity.
+                            </p>
+                            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200/80">
+                                <h4 class="font-bold text-amber-900 mb-1">Website Section Idea — "The Pillars"</h4>
+                                <p class="text-xs text-amber-800">
+                                    Focus on theological grounding, family-centered leadership, and monthly preparation alignment for the massive global Holy Ghost Services hosted right inside Redemption City.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-5 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-rcbc-navy border-b pb-2">Weekly Schedule</h4>
+                            <div class="space-y-2.5 text-xs">
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">Sunday Celebration Service</div>
+                                    <div class="text-amber-700 font-semibold text-[11px]">8:00 AM – 10:30 AM</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">Tuesday Digging Deep (Bible Study)</div>
+                                    <div class="text-amber-700 font-semibold text-[11px]">6:00 PM – 7:45 PM</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">Thursday Faith Clinic (Intensive Prayer)</div>
+                                    <div class="text-amber-700 font-semibold text-[11px]">6:00 PM – 7:30 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier 2: Youth Church Detail -->
+            <div id="min-sec-youth" class="hidden space-y-6">
+                <div class="glass-card rounded-3xl p-6 sm:p-8 border-t-4 border-t-blue-600 space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-blue-700 bg-blue-100 px-3 py-1 rounded-full">Contemporary Expressions Ministry</span>
+                            <h3 class="text-2xl sm:text-3xl font-serif font-extrabold text-rcbc-navy mt-2">The Youth Church</h3>
+                            <p class="text-xs sm:text-sm text-slate-600">Ignite & Deploy: Arise, Shine & Shift Gears</p>
+                        </div>
+                        <button onclick="openVolunteerModal('Youth Church')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md">
+                            Join Youth Expressions Team
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            <p>
+                                <strong>The Identity:</strong> A high-energy, contemporary expressions ministry tailoring word and worship to undergraduates, young professionals, and campus scholars.
+                            </p>
+                            <p>
+                                <strong>Core Focus:</strong> Purpose discovery, career excellence, spiritual fire, and community building.
+                            </p>
+                            <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200/80">
+                                <h4 class="font-bold text-blue-900 mb-1">Website Section Idea — "Ignite & Deploy"</h4>
+                                <p class="text-xs text-blue-800">
+                                    Dynamic section headers like "Arise and Shine" or "Shift Gears." Highlight peer fellowship circles, creative arts departments (media, dance, alternative music), and vocational seminars.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-5 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-rcbc-navy border-b pb-2">Youth Timings</h4>
+                            <div class="space-y-2.5 text-xs">
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">Youth Sunday / Expression Service</div>
+                                    <div class="text-blue-700 font-semibold text-[11px]">Overlaps Sunday morning window (8:00 AM / 10:00 AM)</div>
+                                    <div class="text-[11px] text-slate-500 mt-1">Modern youth-led instrumentation, spoken word, and panel discussions.</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">Bi-Weekly Shift Gears Hub</div>
+                                    <div class="text-blue-700 font-semibold text-[11px]">Friday 6:30 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier 3: Teenagers Church Detail -->
+            <div id="min-sec-teens" class="hidden space-y-6">
+                <div class="glass-card rounded-3xl p-6 sm:p-8 border-t-4 border-t-emerald-600 space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">Safe, Nurturing Teen Hub</span>
+                            <h3 class="text-2xl sm:text-3xl font-serif font-extrabold text-rcbc-navy mt-2">The Teenagers Church</h3>
+                            <p class="text-xs sm:text-sm text-slate-600">The Overflow: Moving from Inherited Faith to Personal Relationship</p>
+                        </div>
+                        <button onclick="openVolunteerModal('Teenagers Church')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-md">
+                            Join Teen Mentors Team
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                        <div class="md:col-span-7 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            <p>
+                                <strong>The Identity:</strong> A vibrant, nurturing, and safe environment designed specifically for teenagers to cross from childhood faith into deep, personal relationships with Christ.
+                            </p>
+                            <p>
+                                <strong>Core Focus:</strong> Bible quizzes, open discussions on identity/peer pressure, career conferences, and interactive multimedia workshops.
+                            </p>
+                            <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200/80">
+                                <h4 class="font-bold text-emerald-900 mb-1">Website Section Idea — "The Overflow"</h4>
+                                <p class="text-xs text-emerald-800">
+                                    Runs simultaneously in a designated wing or overflow section during main services. Filled with interactive Bible study games, film/video shows, and mentorship panels where teenagers can ask tough life questions without judgment.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-5 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                            <h4 class="font-bold text-xs uppercase tracking-wider text-rcbc-navy border-b pb-2">Teenagers Timings</h4>
+                            <div class="space-y-2.5 text-xs">
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">The Overflow Teen Worship</div>
+                                    <div class="text-emerald-700 font-semibold text-[11px]">Sunday 8:30 AM (Overflow Wing)</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-rcbc-navy">Monthly Hangout & Video Show</div>
+                                    <div class="text-emerald-700 font-semibold text-[11px]">Saturday 4:00 PM – 6:30 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: SERMONS & MEDIA ================= -->
+        <section id="view-sermons" class="hidden space-y-8 fade-up">
+            <!-- Livestream Player Card -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 bg-rcbc-dark text-white border border-amber-500/30 space-y-5">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-bold">
+                            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                            <span>SUNDAY SERVICE BROADCAST</span>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-white mt-2">Stream Live from Redemption City</h2>
+                    </div>
+                    <div class="text-xs text-amber-400 font-bold">
+                        <i class="fa-solid fa-users mr-1"></i> 1,420 Believers Online
+                    </div>
+                </div>
+
+                <!-- Video Frame Placeholder -->
+                <div class="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 relative flex items-center justify-center border border-white/10 group">
+                    <img src="https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" alt="Sermon Broadcast">
+                    <button onclick="playSimulatedStream()" class="absolute w-20 h-20 rounded-full bg-amber-500 text-rcbc-dark flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-play ml-1"></i>
+                    </button>
+                    <div class="absolute bottom-4 left-4 bg-rcbc-dark/90 px-4 py-2 rounded-xl text-xs font-bold border border-white/10">
+                        <span class="text-amber-400">Current Series:</span> The Ambassador Mandate (2 Cor 5:20)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Built-in Audio Player -->
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase text-amber-700 bg-amber-100 px-2 py-0.5 rounded">Featured Audio Sermon</span>
+                        <h3 id="audio-title" class="text-base font-bold text-rcbc-navy mt-1">Walking Worthy as Ambassadors of Christ</h3>
+                        <p id="audio-speaker" class="text-xs text-slate-500">General Overseer & RCBC Faculty Panel</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleAudio()" id="btn-audio-play" class="w-12 h-12 rounded-full bg-amber-500 text-rcbc-dark flex items-center justify-center text-lg hover:bg-amber-400 transition-all shadow-md">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulated Audio Progress Bar -->
+                <div class="space-y-1">
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden cursor-pointer">
+                        <div id="audio-progress" class="bg-amber-500 h-full w-1/3 transition-all"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-slate-400 font-bold">
+                        <span id="audio-time">18:45</span>
+                        <span>1:15:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sermon Catalog -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-serif font-bold text-xl text-rcbc-navy">Message Archives & Outlines</h3>
+                    <span class="text-xs text-slate-500">Downloadable study notes</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-blue-100 text-blue-900">Youth Church</span>
+                            <span class="text-[11px] text-slate-400">2 Weeks Ago</span>
+                        </div>
+                        <h4 class="font-bold text-base text-rcbc-navy">Ignite & Deploy: Shift Gears in Your Calling</h4>
+                        <p class="text-xs text-slate-500 line-clamp-2">Tailored for undergraduates, tech builders, and creatives. Converting your natural gifts into an engine for cultural transformation.</p>
+                        <div class="pt-2 flex justify-between items-center text-xs font-bold text-amber-700">
+                            <span>Scripture: Isaiah 60:1-3</span>
+                            <button onclick="alert('Study outline PDF will download directly.')" class="hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-download"></i> Notes
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-900">Teenagers Church</span>
+                            <span class="text-[11px] text-slate-400">3 Weeks Ago</span>
+                        </div>
+                        <h4 class="font-bold text-base text-rcbc-navy">The Overflow: Navigating Identity Without Apology</h4>
+                        <p class="text-xs text-slate-500 line-clamp-2">Addressing peer pressure, social media algorithms, and self-worth from a loving biblical perspective.</p>
+                        <div class="pt-2 flex justify-between items-center text-xs font-bold text-amber-700">
+                            <span>Scripture: 1 Timothy 4:12</span>
+                            <button onclick="alert('Study outline PDF will download directly.')" class="hover:underline flex items-center gap-1">
+                                <i class="fa-solid fa-download"></i> Notes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: EVENTS & CALENDAR ================= -->
+        <section id="view-events" class="hidden space-y-8 fade-up">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border-l-8 border-l-purple-600">
+                <span class="text-xs font-bold text-purple-700 uppercase tracking-widest">Church & RCBC Academic Integration</span>
+                <h2 class="text-2xl sm:text-3xl font-serif font-extrabold text-rcbc-navy mt-1">Events & Theological Calendar</h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                    Stay aligned with Holy Ghost Services, college colloquiums, and seasonal youth retreats inside Redemption City.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Event 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-900 flex flex-col items-center justify-center font-bold flex-shrink-0">
+                            <span class="text-xs uppercase">1st</span>
+                            <span class="text-lg leading-tight font-serif">FRIDAY</span>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold uppercase text-red-600 bg-red-50 px-2 py-0.5 rounded">Redemption City Global</span>
+                            <h3 class="font-serif font-bold text-lg text-rcbc-navy">Global Holy Ghost Service (Monthly Alignment)</h3>
+                            <p class="text-xs text-slate-500">The worldwide flagship gathering under the ministration of Pastor E. A. Adeboye. RCBC Chapel of Praise serves in pre-service prayer clusters.</p>
+                            <div class="text-[11px] text-slate-400 font-semibold"><i class="fa-solid fa-location-dot mr-1"></i> Redemption Arena, Redemption City (Adjacent to RCBC)</div>
+                        </div>
+                    </div>
+                    <button onclick="alert('Event added to your calendar reminder!')" class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-rcbc-navy text-amber-400 text-xs font-bold hover:bg-slate-800 flex-shrink-0">
+                        Add to Calendar
+                    </button>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-900 flex flex-col items-center justify-center font-bold flex-shrink-0">
+                            <span class="text-xs uppercase">MAR</span>
+                            <span class="text-lg leading-tight font-serif">28-29</span>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold uppercase text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Youth Church</span>
+                            <h3 class="font-serif font-bold text-lg text-rcbc-navy">Shift Gears: Youth & Career Leadership Summit</h3>
+                            <p class="text-xs text-slate-500">Two days of intensive marketplace workshops, tech roundtables, spiritual revival, and panel discussions.</p>
+                            <div class="text-[11px] text-slate-400 font-semibold"><i class="fa-solid fa-location-dot mr-1"></i> RCBC Chapel Auditorium & Youth Wing</div>
+                        </div>
+                    </div>
+                    <button onclick="alert('Registration open! Visit youth desk.')" class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 flex-shrink-0">
+                        Register Free
+                    </button>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-900 flex flex-col items-center justify-center font-bold flex-shrink-0">
+                            <span class="text-xs uppercase">MAY</span>
+                            <span class="text-lg leading-tight font-serif">02</span>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold uppercase text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Teenagers Church</span>
+                            <h3 class="font-serif font-bold text-lg text-rcbc-navy">The Overflow: Annual Teen Bible Bowl & Quiz League</h3>
+                            <p class="text-xs text-slate-500">Exciting sword drill competition, video film presentation, and awards for young biblical scholars.</p>
+                            <div class="text-[11px] text-slate-400 font-semibold"><i class="fa-solid fa-location-dot mr-1"></i> Teenagers Overflow Wing</div>
+                        </div>
+                    </div>
+                    <button onclick="alert('Teens Bible Bowl RSVP saved.')" class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 flex-shrink-0">
+                        Teens Sign-Up
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: GIVING ================= -->
+        <section id="view-giving" class="hidden space-y-8 fade-up">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-amber-700 text-xs font-black tracking-widest uppercase">Kingdom Stewardship</span>
+                <h2 class="text-3xl font-serif font-bold text-rcbc-navy">Partner With Us in Kingdom Expansion</h2>
+                <p class="text-xs sm:text-sm text-slate-600">"Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver." (2 Cor 9:7)</p>
+            </div>
+
+            <!-- Direct Bank Transfer Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-600 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-rcbc-navy">Tithes & General Offerings</h3>
+                        <p class="text-xs text-slate-500 mt-1">Supporting pastoral care, weekly services, and campus operations.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-100 text-xs space-y-1">
+                        <div class="text-[11px] text-slate-400 font-bold uppercase">Zenith Bank PLC</div>
+                        <div class="font-black text-base text-rcbc-navy tracking-wider">1012345678</div>
+                        <div class="text-[10px] text-slate-500">RCBC Chapel of Praise</div>
+                    </div>
+                    <button onclick="copyAccount('1012345678')" class="w-full py-2.5 rounded-xl bg-rcbc-navy text-amber-400 text-xs font-bold hover:bg-slate-800">
+                        <i class="fa-solid fa-copy mr-1"></i> Copy Account Number
+                    </button>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-blue-600 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-rcbc-navy">Chapel Building & Media</h3>
+                        <p class="text-xs text-slate-500 mt-1">Audio-visual equipment, youth wing expansion, and sanctuary upgrades.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-100 text-xs space-y-1">
+                        <div class="text-[11px] text-slate-400 font-bold uppercase">GTBank (Guaranty Trust Bank)</div>
+                        <div class="font-black text-base text-rcbc-navy tracking-wider">0123456789</div>
+                        <div class="text-[10px] text-slate-500">RCBC Chapel of Praise - Projects</div>
+                    </div>
+                    <button onclick="copyAccount('0123456789')" class="w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700">
+                        <i class="fa-solid fa-copy mr-1"></i> Copy Account Number
+                    </button>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-emerald-600 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-rcbc-navy">Student-Ministers Fund</h3>
+                        <p class="text-xs text-slate-500 mt-1">Scholarships, meal subsidies, and welfare for theology students at RCBC.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-100 text-xs space-y-1">
+                        <div class="text-[11px] text-slate-400 font-bold uppercase">United Bank for Africa (UBA)</div>
+                        <div class="font-black text-base text-rcbc-navy tracking-wider">2098765432</div>
+                        <div class="text-[10px] text-slate-500">RCBC Chapel - Student Welfare</div>
+                    </div>
+                    <button onclick="copyAccount('2098765432')" class="w-full py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700">
+                        <i class="fa-solid fa-copy mr-1"></i> Copy Account Number
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 6: PLAN VISIT / CONTACT ================= -->
+        <section id="view-contact" class="hidden space-y-8 fade-up">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-rcbc-navy/10 relative overflow-hidden">
+                <div class="max-w-2xl mx-auto text-center space-y-3 mb-8">
+                    <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Christ's Ambassadors Road</span>
+                    <h2 class="text-3xl font-serif font-extrabold text-rcbc-navy">Plan Your Visit to RCBC Chapel</h2>
+                    <p class="text-xs sm:text-sm text-slate-600">
+                        We are thrilled to welcome you! Fill out the brief form below so our protocol team can reserve seats and guide you through Redemption City gates.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto">
+                    <!-- Form Column -->
+                    <div class="lg:col-span-7">
+                        <form onsubmit="handleVisitSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-rcbc-navy mb-1">Full Name *</label>
+                                    <input type="text" id="vName" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 text-xs sm:text-sm bg-white" placeholder="e.g. Bro. David Adeleke">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-rcbc-navy mb-1">Phone / WhatsApp *</label>
+                                    <input type="tel" id="vPhone" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 text-xs sm:text-sm bg-white" placeholder="+234 803 000 0000">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-rcbc-navy mb-1">Service to Attend</label>
+                                    <select id="vService" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 text-xs sm:text-sm bg-white font-medium text-slate-700">
+                                        <option>Sunday Celebration Service (8:00 AM)</option>
+                                        <option>Youth Expression Service (8:00 AM)</option>
+                                        <option>Teenagers Overflow (8:30 AM)</option>
+                                        <option>Tuesday Digging Deep (6:00 PM)</option>
+                                        <option>Thursday Faith Clinic (6:00 PM)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-rcbc-navy mb-1">Number in Party</label>
+                                    <select id="vParty" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 text-xs sm:text-sm bg-white font-medium text-slate-700">
+                                        <option>Just Me</option>
+                                        <option>2 Persons</option>
+                                        <option>Family (3 - 5)</option>
+                                        <option>Group (6+)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-rcbc-navy mb-1">Any Questions or Special Assistance?</label>
+                                <textarea id="vNotes" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-amber-500 text-xs sm:text-sm bg-white" placeholder="e.g. Need directions from Youth Gate, coming with children..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-rcbc-dark font-extrabold py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm uppercase tracking-widest">
+                                Confirm & Plan My Visit
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Campus Location Guide Column -->
+                    <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <h4 class="font-serif font-bold text-lg text-rcbc-navy">Finding Us in Redemption City</h4>
+                        <div class="space-y-3 text-xs text-slate-600">
+                            <p class="flex items-start gap-2">
+                                <i class="fa-solid fa-map-pin text-amber-600 mt-1"></i>
+                                <span><strong>Address:</strong> Christ's Ambassadors Road, inside Redeemed Christian Bible College (RCBC), Redemption City, Km 46 Lagos-Ibadan Expressway.</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <i class="fa-solid fa-car text-blue-600 mt-1"></i>
+                                <span><strong>Gate Directions:</strong> Enter Redemption City via Main Gate or Youth Gate. Follow directional signs toward RCBC Seminary campus.</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <i class="fa-solid fa-phone text-emerald-600 mt-1"></i>
+                                <span><strong>Help Desk:</strong> +234 803 300 7222 / +234 812 456 7890</span>
+                            </p>
+                        </div>
+
+                        <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200/80 text-[11px] text-amber-900">
+                            <strong>Note for Visitors:</strong> Security protocols at Redemption City gates are swift. State that you are visiting RCBC Chapel of Praise for easy passage.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-rcbc-dark text-white pt-14 pb-20 md:pb-12 border-t-4 border-amber-500">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+            <div class="md:col-span-2 space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="h-9 w-9 rounded-full bg-amber-500 text-rcbc-dark flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-church text-base"></i>
+                    </div>
+                    <span class="font-serif font-bold text-xl tracking-wider uppercase text-amber-400">RCBC Chapel of Praise</span>
+                </div>
+                <p class="text-xs text-slate-300 max-w-sm leading-relaxed">
+                    Main Campus parish of the Redeemed Christian Bible College. Raising Christ's Ambassadors through sound doctrine, apostolic prayer, and vibrant community.
+                </p>
+                <div class="text-xs text-amber-400 font-bold">
+                    Christ's Ambassadors Road • Redemption City, Nigeria
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Ministries</h4>
+                <ul class="space-y-2 text-xs text-slate-300">
+                    <li><button onclick="switchView('ministries'); showMinistrySection('main')" class="hover:text-white">The Main Sanctuary (Adult)</button></li>
+                    <li><button onclick="switchView('ministries'); showMinistrySection('youth')" class="hover:text-white">The Youth Church ("Ignite & Deploy")</button></li>
+                    <li><button onclick="switchView('ministries'); showMinistrySection('teens')" class="hover:text-white">The Teenagers Church ("The Overflow")</button></li>
+                    <li><button onclick="switchView('sermons')" class="hover:text-white">Sermons & Audio Messages</button></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">Service Hours</h4>
+                <div class="space-y-2 text-xs text-slate-300">
+                    <p><strong>Sunday:</strong> 8:00 AM Celebration</p>
+                    <p><strong>Tuesday:</strong> 6:00 PM Digging Deep</p>
+                    <p><strong>Thursday:</strong> 6:00 PM Faith Clinic</p>
+                    <p class="text-emerald-400 pt-2"><i class="fa-brands fa-whatsapp mr-1"></i> +234 803 300 7222</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 pt-6 text-center text-[11px] text-slate-400 font-medium flex flex-col sm:flex-row justify-between items-center gap-2">
+            <span>&copy; 2026 RCBC Chapel of Praise (Main Campus), Redemption City. All Rights Reserved.</span>
+            <span>Raising Christ's Ambassadors Across the Nations</span>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom App Bar -->
+    <nav class="lg:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-md z-50">
+        <div class="glass bg-rcbc-dark/95 text-white rounded-full px-3 py-2.5 flex justify-around items-center shadow-2xl border border-amber-500/20">
+            <button onclick="switchView('home')" id="m-nav-home" class="flex flex-col items-center text-amber-400 w-12">
+                <i class="fa-solid fa-house text-sm"></i>
+                <span class="text-[9px] mt-0.5 font-bold">Home</span>
+            </button>
+            <button onclick="switchView('ministries')" id="m-nav-ministries" class="flex flex-col items-center text-slate-400 hover:text-white w-14">
+                <i class="fa-solid fa-users text-sm"></i>
+                <span class="text-[9px] mt-0.5 font-bold">Ministries</span>
+            </button>
+            <button onclick="switchView('sermons')" id="m-nav-sermons" class="flex flex-col items-center text-slate-400 hover:text-white w-14">
+                <i class="fa-solid fa-video text-sm"></i>
+                <span class="text-[9px] mt-0.5 font-bold">Sermons</span>
+            </button>
+            <button onclick="switchView('events')" id="m-nav-events" class="flex flex-col items-center text-slate-400 hover:text-white w-12">
+                <i class="fa-solid fa-calendar-days text-sm"></i>
+                <span class="text-[9px] mt-0.5 font-bold">Events</span>
+            </button>
+            <button onclick="switchView('giving')" id="m-nav-giving" class="flex flex-col items-center text-slate-400 hover:text-white w-12">
+                <i class="fa-solid fa-hand-holding-dollar text-sm"></i>
+                <span class="text-[9px] mt-0.5 font-bold">Give</span>
+            </button>
+            <button onclick="switchView('contact')" id="m-nav-contact" class="flex flex-col items-center text-slate-400 hover:text-white w-12 pl-1 border-l border-white/15">
+                <i class="fa-solid fa-map-location-dot text-sm text-amber-400"></i>
+                <span class="text-[8px] mt-0.5 font-bold text-amber-400">Visit</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Interactive Live Stream Modal -->
+    <div id="live-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-3xl bg-rcbc-dark text-white rounded-3xl shadow-2xl overflow-hidden border border-amber-500/30 p-6 space-y-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                    <h3 class="font-serif font-bold text-xl text-amber-400">Live Sunday Service Broadcast</h3>
+                </div>
+                <button onclick="closeLiveModal()" class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center hover:bg-slate-700">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="aspect-video w-full rounded-2xl bg-black overflow-hidden flex items-center justify-center border border-white/10 relative">
+                <img src="https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-80" alt="Live stream feed">
+                <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 text-center p-4">
+                    <i class="fa-solid fa-satellite-dish text-4xl text-amber-400 animate-bounce mb-3"></i>
+                    <h4 class="font-bold text-lg">Broadcast Feed Connected</h4>
+                    <p class="text-xs text-slate-300 max-w-md mt-1">Live from Christ's Ambassadors Road, Redemption City. Sunday Celebration Service stream will begin according to schedule.</p>
+                </div>
+            </div>
+            <div class="flex justify-between items-center text-xs text-slate-300 pt-2">
+                <span>RCBC Chapel of Praise Audio-Visual Department</span>
+                <button onclick="switchView('giving'); closeLiveModal();" class="text-amber-400 font-bold hover:underline">
+                    Support Live Broadcast
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const photos = [
+            { img: 'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=600&q=80', caption: 'Sunday Celebration Worship' },
+            { img: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80', caption: 'Youth Contemporary Praise' },
+            { img: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=600&q=80', caption: 'The Overflow Teenagers Wing' },
+            { img: 'https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=600&q=80', caption: 'RCBC Seminary Exegesis Class' },
+            { img: 'https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&w=600&q=80', caption: 'Faith Clinic Prayer Altar' },
+            { img: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80', caption: 'Choir & Orchestra Ministration' },
+            { img: 'https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&w=600&q=80', caption: 'Redemption City Campus Peace' },
+            { img: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=80', caption: 'Pastoral & Ministry Council' }
+        ];
+
+        function renderCarousel() {
+            const track = document.getElementById('carousel-track-el');
+            if(!track) return;
+            const duplicated = [...photos, ...photos];
+            track.innerHTML = duplicated.map((item, idx) => \`
+                <div class="w-64 h-44 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border-2 border-white relative group bg-slate-200">
+                    <img src="\${item.img}" alt="\${item.caption}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-3">
+                        <span class="text-[10px] font-bold text-white tracking-wide uppercase"><i class="fa-solid fa-camera text-amber-400 mr-1"></i> \${item.caption}</span>
+                    </div>
+                </div>
+            \`).join('');
+        }
+
+        function switchView(tabId) {
+            const tabs = ['home', 'ministries', 'sermons', 'events', 'giving', 'contact'];
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            tabs.forEach(t => {
+                const sec = document.getElementById('view-' + t);
+                const dBtn = document.getElementById('d-nav-' + t);
+                const mBtn = document.getElementById('m-nav-' + t);
+
+                if(t === tabId) {
+                    sec?.classList.remove('hidden');
+                    if(dBtn) dBtn.className = "text-rcbc-gold font-extrabold border-b-2 border-rcbc-gold pb-0.5";
+                    if(mBtn) mBtn.className = "flex flex-col items-center text-amber-400 w-12 scale-105 transition-transform";
+                } else {
+                    sec?.classList.add('hidden');
+                    if(dBtn) dBtn.className = "hover:text-rcbc-gold transition-colors font-bold text-rcbc-navy/75";
+                    if(mBtn) mBtn.className = "flex flex-col items-center text-slate-400 hover:text-white w-12";
+                }
+            });
+        }
+
+        function showMinistrySection(id) {
+            ['main', 'youth', 'teens'].forEach(k => {
+                const sec = document.getElementById('min-sec-' + k);
+                const btn = document.getElementById('m-btn-' + k);
+                if(k === id) {
+                    sec?.classList.remove('hidden');
+                    if(btn) btn.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs bg-white text-rcbc-navy shadow-sm transition-all";
+                } else {
+                    sec?.classList.add('hidden');
+                    if(btn) btn.className = "flex-1 py-2.5 px-3 rounded-xl font-bold text-xs text-slate-600 hover:text-rcbc-navy transition-all";
+                }
+            });
+        }
+
+        function openMinistryModal(id) {
+            switchView('ministries');
+            showMinistrySection(id);
+        }
+
+        function openLiveModal() {
+            document.getElementById('live-modal')?.classList.remove('hidden');
+        }
+
+        function closeLiveModal() {
+            document.getElementById('live-modal')?.classList.add('hidden');
+        }
+
+        function playSimulatedStream() {
+            openLiveModal();
+        }
+
+        let isPlaying = false;
+        function toggleAudio() {
+            isPlaying = !isPlaying;
+            const btn = document.getElementById('btn-audio-play');
+            if(btn) {
+                btn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play ml-0.5"></i>';
+            }
+        }
+
+        function copyAccount(num) {
+            navigator.clipboard.writeText(num).then(() => {
+                alert('Account number ' + num + ' copied to clipboard!');
+            }).catch(() => {
+                alert('Account number: ' + num);
+            });
+        }
+
+        function handleVisitSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('vName').value;
+            const phone = document.getElementById('vPhone').value;
+            const service = document.getElementById('vService').value;
+            alert(\`Thank you \${name}! Your visit for \${service} has been noted. Our protocol team will reach out via \${phone} with parking & gate directions.\`);
+            e.target.reset();
+        }
+
+        function openVolunteerModal(ministry) {
+            const role = prompt(\`Enter the department you would like to join in \${ministry} (e.g. Choir, Ushering, Technical, Media, Prayer):\`);
+            if(role) {
+                alert(\`Thank you! Your interest in \${role} (\${ministry}) has been submitted to the Chapel secretariat.\`);
+            }
+        }
+
+        // Export this exact document as a standalone single HTML file download
+        function downloadSelf() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rcbc_chapel_of_praise.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCarousel();
+        });
+    </script>
+</body>
+</html>`;
+}

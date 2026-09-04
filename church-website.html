@@ -1,0 +1,248 @@
+<!-- Standalone Church Website HTML File for RCBC Chapel of Praise (Main Campus) -->
+<!-- Generated for offline and standalone distribution -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>RCBC Chapel of Praise (Main Campus) | Raising Christ's Ambassadors</title>
+  <meta name="description" content="Official website for RCBC Chapel of Praise (Main Campus), the institutional campus parish of the Redeemed Christian Bible College inside Redemption City, Nigeria.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rcbc: {
+              cream: '#FAF8F5',
+              navy: '#1B2A4A',
+              navyDark: '#0F1A30',
+              gold: '#D4AF37',
+              goldLight: '#F5E7A3',
+              royal: '#2563EB',
+              emerald: '#10B981'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #FAF8F5; }
+    .glass {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(27, 42, 74, 0.08);
+    }
+    .glass-card {
+      background: linear-gradient(145deg, #FFFFFF 0%, #FAF8F5 100%);
+      border: 1px solid rgba(27, 42, 74, 0.08);
+      box-shadow: 0 10px 30px rgba(27, 42, 74, 0.04);
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .carousel-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 35s linear infinite;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#1B2A4A] font-sans min-h-screen flex flex-col antialiased">
+  <header class="fixed top-0 w-full z-40 px-3 sm:px-6 py-3">
+    <div class="max-w-7xl mx-auto glass rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 flex justify-between items-center shadow-lg">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+        <div class="h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#1B2A4A] flex items-center justify-center text-[#D4AF37] border border-[#D4AF37]/50">
+          <i class="fa-solid fa-church text-base"></i>
+        </div>
+        <div>
+          <span class="block text-sm sm:text-base font-extrabold tracking-tight text-[#1B2A4A] font-serif uppercase">RCBC Chapel of Praise</span>
+          <span class="block text-[9px] sm:text-[10px] text-emerald-700 font-bold tracking-widest uppercase">Redemption City • Christ's Ambassadors Road</span>
+        </div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-[#1B2A4A]/80">
+        <button onclick="switchTab('home')" id="d-nav-home" class="text-emerald-700 font-extrabold border-b-2 border-emerald-600 pb-0.5">Home</button>
+        <button onclick="switchTab('ministries')" id="d-nav-ministries" class="hover:text-emerald-700">Ministries</button>
+        <button onclick="switchTab('media')" id="d-nav-media" class="hover:text-emerald-700">Media / Sermons</button>
+        <button onclick="switchTab('events')" id="d-nav-events" class="hover:text-emerald-700">Events & Calendar</button>
+        <button onclick="switchTab('giving')" id="d-nav-giving" class="hover:text-emerald-700">Giving</button>
+        <button onclick="switchTab('contact')" id="d-nav-contact" class="hover:text-emerald-700">Contact & Location</button>
+      </nav>
+      <button onclick="switchTab('contact')" class="bg-[#1B2A4A] text-[#D4AF37] px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider border border-[#D4AF37]/30">Plan Your Visit</button>
+    </div>
+  </header>
+
+  <main class="flex-1 pt-24 pb-28 px-4 md:px-8 max-w-7xl mx-auto w-full">
+    <!-- TAB 1: HOME -->
+    <section id="view-home" class="space-y-12">
+      <div class="rounded-3xl bg-[#1B2A4A] text-white p-8 sm:p-14 border border-[#D4AF37]/30 shadow-2xl">
+        <span class="inline-block bg-[#D4AF37]/20 text-[#D4AF37] px-3 py-1 rounded-full text-xs font-bold mb-4">REDEEMED CHRISTIAN BIBLE COLLEGE</span>
+        <h1 class="text-3xl sm:text-5xl font-serif font-extrabold leading-tight">Raising Christ's <span class="text-[#D4AF37]">Ambassadors</span> for the Nations</h1>
+        <p class="text-slate-300 text-sm sm:text-base mt-4 max-w-2xl leading-relaxed">
+          Welcome to RCBC Chapel of Praise on Christ's Ambassadors Road inside Redemption City. Anchored in theological depth, intensive Holy Ghost prayer, and family-centered discipleship across our Main Sanctuary, Youth Church, and Teenagers Church.
+        </p>
+        <div class="pt-6 flex flex-wrap gap-3">
+          <button onclick="switchTab('contact')" class="bg-[#D4AF37] text-[#1B2A4A] px-6 py-3 rounded-xl font-extrabold text-xs uppercase">Plan Your Visit</button>
+          <button onclick="switchTab('ministries')" class="bg-white/10 text-white border border-white/20 px-6 py-3 rounded-xl font-extrabold text-xs uppercase">Our 3 Ministries</button>
+        </div>
+      </div>
+
+      <!-- THE PILLARS -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-serif font-bold text-[#1B2A4A]">"The Pillars" of Our Parish</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#D4AF37]">
+            <h3 class="font-bold text-base text-[#1B2A4A]">Theological Grounding</h3>
+            <p class="text-xs text-slate-600 mt-2">Anchored in the RCBC curriculum, serving as a training hub for future global pastors, theologians, and Christ's ambassadors with sound scriptural depth.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-600">
+            <h3 class="font-bold text-base text-[#1B2A4A]">Family-Centered Leadership</h3>
+            <p class="text-xs text-slate-600 mt-2">Nurturing adults, undergraduate scholars, and teenagers simultaneously with biblical family values and pastoral care.</p>
+          </div>
+          <div class="glass-card p-6 rounded-2xl border-l-4 border-l-rose-500">
+            <h3 class="font-bold text-base text-[#1B2A4A]">Holy Ghost Service Alignment</h3>
+            <p class="text-xs text-slate-600 mt-2">Located inside Redemption City (Km 46 Lagos-Ibadan Expressway), maintaining monthly prayer preparedness for the global Holy Ghost Services.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 MINISTRIES -->
+      <div class="space-y-6">
+        <h2 class="text-2xl font-serif font-bold text-[#1B2A4A]">Our Three Distinct Ministries</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <span class="text-[10px] font-bold uppercase bg-[#1B2A4A] text-[#D4AF37] px-2 py-0.5 rounded">Spiritual Epicenter</span>
+            <h3 class="font-serif font-bold text-lg text-[#1B2A4A]">The Main Sanctuary</h3>
+            <p class="text-xs text-slate-600">Scriptural depth, intensive prayer, classical/contemporary worship. Sundays 8:00 AM • Tuesdays 6:00 PM • Thursdays 6:00 PM.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <span class="text-[10px] font-bold uppercase bg-blue-50 text-blue-700 px-2 py-0.5 rounded">Ignite & Deploy</span>
+            <h3 class="font-serif font-bold text-lg text-[#1B2A4A]">The Youth Church</h3>
+            <p class="text-xs text-slate-600">High-energy contemporary worship for undergraduates and young professionals. Purpose discovery & creative arts. Sundays 8:00 AM.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <span class="text-[10px] font-bold uppercase bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded">The Overflow</span>
+            <h3 class="font-serif font-bold text-lg text-[#1B2A4A]">The Teenagers Church</h3>
+            <p class="text-xs text-slate-600">Safe, judgment-free environment for teenagers. Bible quizzes, multimedia workshops, and open identity discussions. Sundays 8:00 AM.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MINISTRIES -->
+    <section id="view-ministries" class="hidden space-y-8">
+      <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#D4AF37]">
+        <h2 class="text-2xl font-serif font-bold text-[#1B2A4A]">Detailed Ministry Breakdown</h2>
+        <p class="text-xs text-slate-600 mt-1">Adult Sanctuary, Youth Church, and Teenagers Church.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
+        <h3 class="font-serif font-bold text-lg text-[#1B2A4A]">1. The Main Sanctuary (Adult Church)</h3>
+        <p class="text-xs text-slate-700"><strong>Identity:</strong> The spiritual epicenter of RCBC (Main Campus), serving as a training hub for future global pastors, theologians, and Christ's ambassadors.</p>
+        <p class="text-xs text-slate-700"><strong>Core Focus:</strong> Scriptural depth, intensive prayer, classical and contemporary worship, and doctrinal integrity.</p>
+        <p class="text-xs text-slate-700"><strong>Timings:</strong> Sunday Celebration Service (8:00 AM), Tuesday Digging Deep (6:00 PM), Thursday Faith Clinic (6:00 PM).</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
+        <h3 class="font-serif font-bold text-lg text-[#1B2A4A]">2. The Youth Church</h3>
+        <p class="text-xs text-slate-700"><strong>Identity:</strong> High-energy, contemporary expressions ministry tailoring word and worship to undergraduates, young professionals, and campus scholars.</p>
+        <p class="text-xs text-slate-700"><strong>Core Focus:</strong> Purpose discovery, career excellence, spiritual fire, and community building.</p>
+        <p class="text-xs text-slate-700"><strong>Section Idea ("Ignite & Deploy"):</strong> "Arise and Shine" / "Shift Gears", creative arts, alternative music, and vocational seminars. Sundays 8:00 AM.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
+        <h3 class="font-serif font-bold text-lg text-[#1B2A4A]">3. The Teenagers Church</h3>
+        <p class="text-xs text-slate-700"><strong>Identity:</strong> Vibrant, nurturing, and safe environment designed specifically for teenagers to cross into deep relationships with Christ.</p>
+        <p class="text-xs text-slate-700"><strong>Core Focus:</strong> Bible quizzes, discussions on identity/peer pressure, career conferences, and multimedia workshops.</p>
+        <p class="text-xs text-slate-700"><strong>Section Idea ("The Overflow"):</strong> Designated overflow wing, interactive Bible study games, film shows, and mentorship panels. Sundays 8:00 AM.</p>
+      </div>
+    </section>
+
+    <!-- TAB 3: MEDIA -->
+    <section id="view-media" class="hidden space-y-6">
+      <div class="bg-[#1B2A4A] text-white p-8 rounded-3xl border border-[#D4AF37]/30 space-y-4">
+        <span class="text-xs text-[#D4AF37] font-bold uppercase">Live Broadcast Altar</span>
+        <h2 class="text-2xl font-serif font-bold">Sunday Live Stream & Sermon Archives</h2>
+        <p class="text-xs text-slate-300">Live multi-camera streaming every Sunday 8:00 AM from Christ's Ambassadors Road inside Redemption City.</p>
+      </div>
+    </section>
+
+    <!-- TAB 4: EVENTS -->
+    <section id="view-events" class="hidden space-y-6">
+      <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#D4AF37]">
+        <h2 class="text-2xl font-serif font-bold text-[#1B2A4A]">Events & Holy Ghost Service Calendar</h2>
+        <p class="text-xs text-slate-600">Academic calendar integrations and Holy Ghost Service updates.</p>
+      </div>
+      <div class="p-6 bg-white rounded-2xl border border-slate-200 space-y-2">
+        <span class="text-xs font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded">Redemption City Focus</span>
+        <h3 class="font-bold text-lg text-[#1B2A4A]">Monthly Global Holy Ghost Service</h3>
+        <p class="text-xs text-slate-600">Every 1st Friday of the month • Redemption City Arena. RCBC Chapel serves as a prayer and volunteer coordination base.</p>
+      </div>
+    </section>
+
+    <!-- TAB 5: GIVING -->
+    <section id="view-giving" class="hidden space-y-6">
+      <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-600">
+        <h2 class="text-2xl font-serif font-bold text-[#1B2A4A]">Online Giving & Tithes</h2>
+        <p class="text-xs text-slate-600">Designated bank transfer accounts for sanctuary operations and student pastor scholarships.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-2">
+          <h4 class="font-bold text-[#1B2A4A] text-sm">Tithes & Offerings</h4>
+          <p class="text-slate-500">GTBank • 0123456789 • RCBC Chapel of Praise</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-2">
+          <h4 class="font-bold text-[#1B2A4A] text-sm">RCBC Student Pastor Scholarships</h4>
+          <p class="text-slate-500">Zenith Bank • 1012345678 • RCBC Training Support</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: CONTACT -->
+    <section id="view-contact" class="hidden space-y-6">
+      <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#1B2A4A]">
+        <h2 class="text-2xl font-serif font-bold text-[#1B2A4A]">Contact & Location</h2>
+        <p class="text-xs text-slate-600">Christ's Ambassadors Road, inside Redemption City (Km 46, Lagos-Ibadan Expressway, Ogun State, Nigeria).</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 max-w-lg space-y-3 text-xs">
+        <h3 class="font-bold text-base text-[#1B2A4A]">Plan Your Sunday Visit</h3>
+        <p class="text-slate-500">Join us on Sunday at 8:00 AM across any of our three ministry wings.</p>
+        <p class="text-slate-700 font-bold">Chapel Office: +234 803 123 4567 • chapelofpraise@rcbc.edu.ng</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="lg:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[95%] max-w-lg z-50">
+    <div class="glass bg-[#1B2A4A]/95 text-white rounded-full px-3 py-2 flex justify-around items-center shadow-2xl border border-[#D4AF37]/20">
+      <button onclick="switchTab('home')" class="text-[#D4AF37] flex flex-col items-center"><i class="fa-solid fa-house text-sm"></i><span class="text-[9px]">Home</span></button>
+      <button onclick="switchTab('ministries')" class="text-slate-300 flex flex-col items-center"><i class="fa-solid fa-users text-sm"></i><span class="text-[9px]">Ministries</span></button>
+      <button onclick="switchTab('media')" class="text-slate-300 flex flex-col items-center"><i class="fa-solid fa-radio text-sm"></i><span class="text-[9px]">Media</span></button>
+      <button onclick="switchTab('events')" class="text-slate-300 flex flex-col items-center"><i class="fa-solid fa-calendar text-sm"></i><span class="text-[9px]">Events</span></button>
+      <button onclick="switchTab('giving')" class="text-slate-300 flex flex-col items-center"><i class="fa-solid fa-heart text-sm"></i><span class="text-[9px]">Giving</span></button>
+      <button onclick="switchTab('contact')" class="text-slate-300 flex flex-col items-center"><i class="fa-solid fa-map-pin text-sm"></i><span class="text-[9px]">Visit</span></button>
+    </div>
+  </nav>
+
+  <footer class="bg-[#1B2A4A] text-white py-8 px-4 text-center text-xs border-t-4 border-[#D4AF37]">
+    <p class="font-bold text-[#D4AF37]">RCBC Chapel of Praise (Main Campus)</p>
+    <p class="text-slate-400 mt-1">Raising Christ's Ambassadors • Redeemed Christian Bible College • Redemption City, Nigeria</p>
+  </footer>
+
+  <script>
+    function switchTab(id) {
+      ['home', 'ministries', 'media', 'events', 'giving', 'contact'].forEach(t => {
+        document.getElementById('view-' + t)?.classList.toggle('hidden', t !== id);
+        const d = document.getElementById('d-nav-' + t);
+        if (d) d.className = (t === id) ? "text-emerald-700 font-extrabold border-b-2 border-emerald-600 pb-0.5" : "hover:text-emerald-700";
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
